@@ -1,3 +1,3 @@
 const Package = require('./Package')
 
-module.exports = Package
+module.exports = {Package}
