@@ -3,19 +3,21 @@ const BaseWrapper = require('./BaseWrapper')
 class Package extends BaseWrapper {
   constructor(packageName) {
     super()
+    this.loaded = false
     this.name = packageName
     this.avaialableVersion = null
     this.hasUpgrades = false
   }
 
-  async loadMeta() {
+  async load() {
     try {
       let result = await this.exec(`dpkg -s ${this.name}`)
       let data = this._parseMetadata(result)
       Object.assign(this, data)
       this.avaialableVersion = this.version
     } catch(e) {
-      return this.metaLoaded = false
+      this.loaded = false
+      return this
     }
 
     try {
@@ -25,7 +27,8 @@ class Package extends BaseWrapper {
     } catch(e) {
       this.hasUpgrades = false
     }
-    return this.metaLoaded = true
+    this.loaded = true
+    return this
   }
 
   _parseMetadata(output='') {
