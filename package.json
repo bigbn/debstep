@@ -22,8 +22,5 @@
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
   "dependencies": {
-    "child-process-promise": "^2.2.1",
-    "core-worker": "^0.3.5",
-    "process-promises": "^1.0.0"
   }
 }
