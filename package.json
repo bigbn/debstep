@@ -1,0 +1,29 @@
+{
+  "name": "debstep",
+  "version": "0.1.0",
+  "description": "Control apt, dpkg tasks via node js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigbn/debstep.git"
+  },
+  "keywords": [
+    "apt",
+    "debian",
+    "dpkg"
+  ],
+  "author": "Pavel Shabardin",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bigbn/debstep/issues"
+  },
+  "homepage": "https://github.com/bigbn/debstep#readme",
+  "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "core-worker": "^0.3.5",
+    "process-promises": "^1.0.0"
+  }
+}
