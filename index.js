@@ -1,3 +1,6 @@
 const Package = require('./Package')
+const PackageManager = require('./PackageManager')
 
-module.exports = {Package}
+let pm = new PackageManager()
+
+module.exports = {Package, PackageManager}
