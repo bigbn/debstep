@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "Control apt, dpkg tasks via node js",
   "main": "index.js",
+  "gypfile": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +23,7 @@
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
   "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^3.0.2"
   }
 }
