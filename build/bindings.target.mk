@@ -37,7 +37,9 @@ CFLAGS_C_Debug :=
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++1y \
+	-fpermissive \
+	-fexceptions
 
 INCS_Debug := \
 	-I/home/node/.cache/node-gyp/14.15.0/include/node \
@@ -80,7 +82,9 @@ CFLAGS_C_Release :=
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++1y \
+	-fpermissive \
+	-fexceptions
 
 INCS_Release := \
 	-I/home/node/.cache/node-gyp/14.15.0/include/node \
