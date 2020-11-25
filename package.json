@@ -1,12 +1,20 @@
 {
   "name": "debstep",
-  "version": "0.1.1",
-  "description": "Control apt, dpkg tasks via node js",
+  "version": "1.0.0",
+  "description": "Control apt tasks via nodejs",
   "main": "index.js",
   "gypfile": true,
   "scripts": {
     "install": "node-gyp-build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:clean && npm run build:native && npm run build:lib && npm run build:flow && npm run build:doc && npm run build:copy",
+    "build:native": "prebuildify --napi",
+    "build:clean": "rimraf lib",
+    "build:lib": "babel src/ -d lib/",
+    "build:flow": "flow-copy-source -v src lib",
+    "build:doc": "documentation readme src/* --section Reference",
+    "build:copy": "cp -r ./prebuilds lib/prebuilds && babel-node ./scripts/copy.js",
+    "lint": "flow"
   },
   "repository": {
     "type": "git",
@@ -17,15 +25,35 @@
     "debian",
     "dpkg"
   ],
+  "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
   "author": "Pavel Shabardin",
   "license": "Apache-2.0",
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "bugs": {
     "url": "https://github.com/bigbn/debstep/issues"
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
   "dependencies": {
-    "bindings": "^1.5.0",
+    "bindings": "^1.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-flow": "^7.12.1",
+    "babel-eslint": "^10.1.0",
+    "documentation": "^13.1.0",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.138.0",
+    "flow-copy-source": "^2.0.9",
     "node-addon-api": "^3.0.2",
-    "node-gyp-build": "^4.2.3"
+    "node-gyp-build": "^4.2.3",
+    "prebuildify": "^4.1.1",
+    "rimraf": "^3.0.2",
+    "standard": "^16.0.3"
   }
 }
