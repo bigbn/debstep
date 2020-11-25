@@ -36,8 +36,7 @@
     "url": "https://github.com/bigbn/debstep/issues"
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
-  "dependencies": {
-    "bindings": "^1.5.0",
+  "dependencies": {    
     "node-gyp-build": "^4.2.3",
     "prebuildify": "^4.1.1"
   },
@@ -53,7 +52,6 @@
     "flow": "^0.2.3",
     "flow-bin": "^0.138.0",
     "flow-copy-source": "^2.0.9",
-    "node-addon-api": "^3.0.2",        
     "rimraf": "^3.0.2",
     "standard": "^16.0.3"
   }

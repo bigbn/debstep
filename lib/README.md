@@ -58,7 +58,7 @@ Detailed package info
 #### Examples
 
 ```javascript
-import { aptCache } from 'debstep
+import { aptCache } from 'debstep'
 const meta = aptCache.getTags('vim', ['Installed-Size'], '2:8.1.0875-5')
 console.log('vim installed size', meta['Installed-Size'])
 // #_ vim installed size 2800
