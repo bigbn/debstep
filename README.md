@@ -25,118 +25,18 @@ This library use native binary `apt-pkg` library to access `apt` features.
     -   [hasUpgradesSync](#hasupgradessync)
         -   [Parameters](#parameters-3)
         -   [Examples](#examples-3)
--   [aptCache](#aptcache-1)
-    -   [defaultTags](#defaulttags-1)
-    -   [getTagsSync](#gettagssync-1)
-        -   [Parameters](#parameters-4)
-        -   [Examples](#examples-4)
-    -   [getCurrentVersionSync](#getcurrentversionsync-1)
-        -   [Parameters](#parameters-5)
-        -   [Examples](#examples-5)
-    -   [getCandidateVersionSync](#getcandidateversionsync-1)
-        -   [Parameters](#parameters-6)
-        -   [Examples](#examples-6)
-    -   [hasUpgradesSync](#hasupgradessync-1)
-        -   [Parameters](#parameters-7)
-        -   [Examples](#examples-7)
 -   [apt](#apt)
     -   [update](#update)
     -   [upgrade](#upgrade)
     -   [install](#install)
-        -   [Parameters](#parameters-8)
+        -   [Parameters](#parameters-4)
     -   [uninstall](#uninstall)
-        -   [Parameters](#parameters-9)
+        -   [Parameters](#parameters-5)
+-   [debstep](#debstep)
 
 ## aptCache
 
 apt-cache representation
-
-### defaultTags
-
-List of tags used in getTags method defaults
-
-Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>
-
-### getTagsSync
-
-Extract package meta-information from apt-cache index.
-Detailed package info
-
-#### Parameters
-
--   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `tags` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**  (optional, default `defaultTags`)
--   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
-
-#### Examples
-
-```javascript
-import { aptCache } from 'debstep'
-const meta = aptCache.getTags('vim', ['Installed-Size'], '2:8.1.0875-5')
-console.log('vim installed size', meta['Installed-Size'])
-// #_ vim installed size 2800
-```
-
-Returns **{}?** 
-
-### getCurrentVersionSync
-
-Get current package version
-
-#### Parameters
-
--   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-#### Examples
-
-```javascript
-import { aptCache } from 'debstep'
-const currentVersion = aptCache.getCurrentVersionSync('vim')
-console.log('current version', currentVersion)
-// #_ current version 2:8.1.0875-4
-```
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
-
-### getCandidateVersionSync
-
-Get latest package version to be upgraded
-
-#### Parameters
-
--   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-#### Examples
-
-```javascript
-import { aptCache } from 'debstep'
-const availableVersion = aptCache.getCandidateVersionSync('vim')
-console.log('new version', availableVersion)
-// #_ new version 2:8.1.0875-5
-```
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
-
-### hasUpgradesSync
-
-Check if package has upgrades
-
-#### Parameters
-
--   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-#### Examples
-
-```javascript
-import { aptCache } from 'debstep'
-const updateAvailable = aptCache.hasUpgradesSync('vim')
-console.log('vim has a new version to upgrade:', updateAvailable)
-// #_ vim has a new version to upgrade: false
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
-
-## aptCache
 
 ### defaultTags
 
@@ -260,3 +160,5 @@ apt-uninstall native execution
 
 
 -   Throws **any** Not implemented yet
+
+## debstep
