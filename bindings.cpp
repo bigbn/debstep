@@ -4,6 +4,12 @@
 #include <typeinfo>
 #include <apt-pkg/cachefile.h>
 #include <apt-pkg/pkgcache.h>
+#include <apt-pkg/pkgrecords.h>
+#include <apt-pkg/init.h>
+#include <apt-pkg/tagfile.h>
+#include <apt-pkg/pkgsystem.h>
+#include <apt-pkg/policy.h>
+
 #include <vector>
 #include <utility>
 using namespace std;
