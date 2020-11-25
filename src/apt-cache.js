@@ -37,7 +37,7 @@ export function getTagsSync (packageName: string, tags?:string[] = defaultTags, 
  * import { aptCache } from 'debstep'
  * const currentVersion = aptCache.getCurrentVersionSync('vim')
  * console.log('current version', currentVersion)
- * # #_ current version 2:8.1.0875-4
+ * // #_ current version 2:8.1.0875-4
  */
 export function getCurrentVersionSync (packageName: string) : ?string {
   return bindings.getPackageCurrentVersion(packageName)
