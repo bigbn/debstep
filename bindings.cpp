@@ -16,6 +16,8 @@ namespace debstep {
   std::vector<std::string> getArray(napi_env env, napi_value value);
   pkgRecords::Parser &LookupParser(pkgRecords &Recs, pkgCache::VerIterator const &V, pkgCache::VerFileIterator &Vf);
   napi_value init(napi_env env, napi_value exports);
+  napi_value GetPackageCandidateVersion(napi_env env, napi_callback_info info);
+  napi_value GetPackageCurrentVersion(napi_env env, napi_callback_info info);
 
   napi_value GetPackageTags(napi_env env, napi_callback_info info) {
     size_t argc = 3;
@@ -46,7 +48,7 @@ namespace debstep {
     pkgCacheFile cachefile;
     pkgCache *cache = cachefile.GetPkgCache();
     pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
-   
+    
     if (packageIterator) {
       std::vector<std::pair<std::string, std::string>> dict = packageInfo(packageIterator, cachefile, tags, version);
       if (dict.size() == 0) return nullptr;
@@ -70,10 +72,58 @@ namespace debstep {
     return nullptr;
   }
 
+  napi_value GetPackageCandidateVersion(napi_env env, napi_callback_info info) {
+    size_t argc = 1;
+    napi_value result, args[1];
+    napi_status status;
+    status = napi_get_cb_info(env, info, &argc, args, NULL, NULL); 
+    if (status != napi_ok) return nullptr;
+    std::string package_name;
+    try {
+      package_name = getString(env, args[0]);
+    } catch (...) {
+      return nullptr;
+    }
+    pkgCacheFile cachefile;
+    pkgCache *cache = cachefile.GetPkgCache();
+    pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
+    pkgPolicy *policy = cachefile.GetPolicy();
+    pkgCache::VerIterator cand = policy->GetCandidateVer(packageIterator);
+    if (cand) {
+      status = napi_create_string_utf8(env, cand.VerStr(), sizeof(cand.VerStr()), &result);
+      if (status != napi_ok) return nullptr;
+      return result;
+    }
+    return nullptr;
+  }
+
+  napi_value GetPackageCurrentVersion(napi_env env, napi_callback_info info) {
+    size_t argc = 1;
+    napi_value result, args[1];
+    napi_status status;
+    status = napi_get_cb_info(env, info, &argc, args, NULL, NULL); 
+    if (status != napi_ok) return nullptr;
+    std::string package_name;
+    try {
+      package_name = getString(env, args[0]);
+    } catch (...) {
+      return nullptr;
+    }
+    pkgCacheFile cachefile;
+    pkgCache *cache = cachefile.GetPkgCache();
+    pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
+    pkgCache::VerIterator current = packageIterator.CurrentVer();
+    if (current) {
+      status = napi_create_string_utf8(env, current.VerStr(), sizeof(current.VerStr()), &result);
+      if (status != napi_ok) return nullptr;
+      return result;
+    }
+    return nullptr;
+  }
+
   std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version) {
     std::vector<std::pair<std::string, std::string>> result = {};
     pkgCache::VerIterator ver_iterator;
-    
     if (version != "current") {
       pkgCache::VerIterator version_list = P.VersionList();
       while(!version_list.end()) {
@@ -85,10 +135,8 @@ namespace debstep {
         version_list++;
       }
     } else ver_iterator = P.CurrentVer();
-
-    std::string current_version(ver_iterator.VerStr());
     if(!ver_iterator || !ver_iterator.FileList()) return result;
-
+    std::string current_version(ver_iterator.VerStr());
     pkgRecords Recs(cacheFile);
     pkgCache::VerFileIterator vf_iterator = ver_iterator.FileList();
     
@@ -161,16 +209,22 @@ namespace debstep {
 
   napi_value init(napi_env env, napi_value exports) {
     napi_status status;
-    napi_value fn;
+    napi_value fn1, fn2, fn3;
     pkgInitConfig(*_config);
     pkgInitSystem(*_config, _system);    
     
-    status = napi_create_function(env, nullptr, NAPI_AUTO_LENGTH, GetPackageTags, nullptr, &fn);
+    status = napi_create_function(env, nullptr, NAPI_AUTO_LENGTH, GetPackageTags, nullptr, &fn1);
     if (status != napi_ok) return nullptr;
-
-    status = napi_set_named_property(env, exports, "getPackageTags", fn);
+    status = napi_create_function(env, nullptr, NAPI_AUTO_LENGTH, GetPackageCandidateVersion, nullptr, &fn2);
     if (status != napi_ok) return nullptr;
-
+    status = napi_create_function(env, nullptr, NAPI_AUTO_LENGTH, GetPackageCurrentVersion, nullptr, &fn3);
+    if (status != napi_ok) return nullptr;
+    status = napi_set_named_property(env, exports, "getPackageTags", fn1);
+    if (status != napi_ok) return nullptr;
+    status = napi_set_named_property(env, exports, "getPackageCandidateVersion", fn2);
+    if (status != napi_ok) return nullptr;
+    status = napi_set_named_property(env, exports, "getPackageCurrentVersion", fn3);
+    if (status != napi_ok) return nullptr;
     return exports;
   }
 
