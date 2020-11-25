@@ -1,6 +1,6 @@
 {
   "name": "debstep",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Control apt tasks via nodejs",
   "main": "index.js",
   "gypfile": true,
@@ -37,7 +37,9 @@
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
   "dependencies": {
-    "bindings": "^1.5.0"
+    "bindings": "^1.5.0",
+    "node-gyp-build": "^4.2.3",
+    "prebuildify": "^4.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
@@ -51,9 +53,7 @@
     "flow": "^0.2.3",
     "flow-bin": "^0.138.0",
     "flow-copy-source": "^2.0.9",
-    "node-addon-api": "^3.0.2",
-    "node-gyp-build": "^4.2.3",
-    "prebuildify": "^4.1.1",
+    "node-addon-api": "^3.0.2",        
     "rimraf": "^3.0.2",
     "standard": "^16.0.3"
   }
