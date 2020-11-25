@@ -1,4 +1,5 @@
 const BaseWrapper = require('./BaseWrapper')
+const bindings = require('node-gyp-build')(__dirname)
 
 /**
  * DEB-package representation
@@ -19,6 +20,10 @@ class Package extends BaseWrapper {
     this.name = packageName
     this.avaialableVersion = null
     this.hasUpgrades = false
+  }
+
+  getTagsSync (tags=['Package', 'Version', 'Installed-Size', 'Maintainer', 'Architecture']/*:string[]*/, version=null /*:string*/) /*:Object|undefined*/{     
+    return bindings.getPackageTags(this.name, tags, version)
   }
 
   /**

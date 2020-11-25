@@ -42,13 +42,13 @@ CFLAGS_CC_Debug := \
 	-fexceptions
 
 INCS_Debug := \
-	-I/home/node/.cache/node-gyp/14.15.0/include/node \
-	-I/home/node/.cache/node-gyp/14.15.0/src \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/openssl/config \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/openssl/openssl/include \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/uv/include \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/zlib \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/v8/include
+	-I/tmp/prebuildify/node/15.0.0/include/node \
+	-I/tmp/prebuildify/node/15.0.0/src \
+	-I/tmp/prebuildify/node/15.0.0/deps/openssl/config \
+	-I/tmp/prebuildify/node/15.0.0/deps/openssl/openssl/include \
+	-I/tmp/prebuildify/node/15.0.0/deps/uv/include \
+	-I/tmp/prebuildify/node/15.0.0/deps/zlib \
+	-I/tmp/prebuildify/node/15.0.0/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=bindings' \
@@ -87,13 +87,13 @@ CFLAGS_CC_Release := \
 	-fexceptions
 
 INCS_Release := \
-	-I/home/node/.cache/node-gyp/14.15.0/include/node \
-	-I/home/node/.cache/node-gyp/14.15.0/src \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/openssl/config \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/openssl/openssl/include \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/uv/include \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/zlib \
-	-I/home/node/.cache/node-gyp/14.15.0/deps/v8/include
+	-I/tmp/prebuildify/node/15.0.0/include/node \
+	-I/tmp/prebuildify/node/15.0.0/src \
+	-I/tmp/prebuildify/node/15.0.0/deps/openssl/config \
+	-I/tmp/prebuildify/node/15.0.0/deps/openssl/openssl/include \
+	-I/tmp/prebuildify/node/15.0.0/deps/uv/include \
+	-I/tmp/prebuildify/node/15.0.0/deps/zlib \
+	-I/tmp/prebuildify/node/15.0.0/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/bindings.o

@@ -1,9 +1,8 @@
 const Package = require('./Package')
 const PackageManager = require('./PackageManager')
-const bindings = require('./build/Release/bindings');
-
-console.log(bindings.getPackageTags("vim", ["Package", "XB-Nginx-Template", "Version", "Description"]))
 
 let pm = new PackageManager()
+const package = new Package('vim')
+console.log(package.getTagsSync())
 
 module.exports = {Package, PackageManager}

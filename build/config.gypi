@@ -77,7 +77,8 @@
     "v8_trace_maps": 0,
     "v8_use_siphash": 1,
     "want_separate_host_toolset": 0,
-    "nodedir": "/home/node/.cache/node-gyp/14.15.0",
-    "standalone_static_library": 1
+    "nodedir": "/tmp/prebuildify/node/15.0.0",
+    "standalone_static_library": 1,
+    "target": "15.0.0"
   }
 }

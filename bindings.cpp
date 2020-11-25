@@ -8,8 +8,8 @@
 #include <utility>
 using namespace std;
 
-namespace demo {
-  
+namespace debstep {
+
   napi_value GetPackageTags(napi_env env, napi_callback_info info);
   std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version);
   std::string getString(napi_env env, napi_value value);
@@ -175,6 +175,5 @@ namespace demo {
   }
 
 
-  NAPI_MODULE(NODE_GYP_MODULE_NAME, init)
-
-}  // namespace demo
+  NAPI_MODULE(debstep, init)
+}

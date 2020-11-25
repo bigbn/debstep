@@ -5,6 +5,7 @@
   "main": "index.js",
   "gypfile": true,
   "scripts": {
+    "install": "node-gyp-build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/bigbn/debstep#readme",
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^3.0.2"
+    "node-addon-api": "^3.0.2",
+    "node-gyp-build": "^4.2.3"
   }
 }
