@@ -80,7 +80,7 @@ Get current package version
 import { aptCache } from 'debstep'
 const currentVersion = aptCache.getCurrentVersionSync('vim')
 console.log('current version', currentVersion)
-# #_ current version 2:8.1.0875-4
+// #_ current version 2:8.1.0875-4
 ```
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
