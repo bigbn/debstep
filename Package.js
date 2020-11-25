@@ -1,6 +1,11 @@
 const BaseWrapper = require('./BaseWrapper')
 const bindings = require('node-gyp-build')(__dirname)
 
+
+console.log(bindings.getPackageTags("npm", ["Package", "XB-Nginx-Template", "Version", "Description"]))
+console.log(bindings.getPackageCandidateVersion("libkdb5-9"))
+console.log(bindings.getPackageCurrentVersion("libkdb5-9"))
+
 /**
  * DEB-package representation
  * Must be initialized with asynchronous "load" method before
