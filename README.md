@@ -3,6 +3,10 @@
 Library to control `apt`(debian, ubuntu, mint default package manager) tasks via nodejs.
 This library use native binary `apt-pkg` library to access `apt` features.
 
+Package `libapt-pkg-dev` may required before installation.
+
+    sudo apt install libapt-pkg-dev
+
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
 # Reference
