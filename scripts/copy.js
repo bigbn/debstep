@@ -26,7 +26,7 @@ async function createPackageFile () {
 }
 
 async function run () {
-  await ['README.md', 'LICENSE'].map(file => copyFile(file))
+  await ['README.md', 'LICENSE', 'binding.gyp', 'bindings.cpp'].map(file => copyFile(file))
   await createPackageFile()
 }
 
