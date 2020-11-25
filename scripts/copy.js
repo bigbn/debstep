@@ -15,7 +15,7 @@ async function createPackageFile () {
   const oldPckgData = require(oldPckgPath)
 
   delete oldPckgData.private
-  // delete oldPckgData.scripts
+  delete oldPckgData.scripts
   delete oldPckgData.devDependencies
 
   const newPckgPath = resolve(__dirname, '../lib/package.json')
