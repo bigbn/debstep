@@ -1,6 +1,6 @@
 {
   "name": "debstep",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Control apt tasks via nodejs",
   "main": "index.js",
   "gypfile": true,
