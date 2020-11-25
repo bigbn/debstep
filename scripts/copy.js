@@ -18,6 +18,10 @@ async function createPackageFile () {
   delete oldPckgData.scripts
   delete oldPckgData.devDependencies
 
+  oldPckgData.scripts = {
+    install: 'node-gyp-build'
+  }
+
   const newPckgPath = resolve(__dirname, '../lib/package.json')
   const newPckgData = Object.assign(oldPckgData, { main: './index.js' })
   await writeFile(newPckgPath, JSON.stringify(newPckgData), 'utf8')

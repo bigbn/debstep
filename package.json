@@ -3,7 +3,6 @@
   "version": "1.0.3",
   "description": "Control apt tasks via nodejs",
   "main": "index.js",
-  "gypfile": true,
   "scripts": {
     "prepare": "npm run build",
     "install": "node-gyp-build",
