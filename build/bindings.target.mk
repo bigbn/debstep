@@ -7,13 +7,8 @@ DEFS_Debug := \
 	'-DUSING_UV_SHARED=1' \
 	'-DUSING_V8_SHARED=1' \
 	'-DV8_DEPRECATION_WARNINGS=1' \
-	'-DV8_DEPRECATION_WARNINGS' \
-	'-DV8_IMMINENT_DEPRECATION_WARNINGS' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
-	'-D__STDC_FORMAT_MACROS' \
-	'-DOPENSSL_NO_PINSHARED' \
-	'-DOPENSSL_THREADS' \
 	'-DBUILDING_NODE_EXTENSION' \
 	'-DDEBUG' \
 	'-D_DEBUG' \
@@ -37,31 +32,26 @@ CFLAGS_C_Debug :=
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y \
+	-std=gnu++0x \
 	-fpermissive \
 	-fexceptions
 
 INCS_Debug := \
-	-I/tmp/prebuildify/node/15.0.0/include/node \
-	-I/tmp/prebuildify/node/15.0.0/src \
-	-I/tmp/prebuildify/node/15.0.0/deps/openssl/config \
-	-I/tmp/prebuildify/node/15.0.0/deps/openssl/openssl/include \
-	-I/tmp/prebuildify/node/15.0.0/deps/uv/include \
-	-I/tmp/prebuildify/node/15.0.0/deps/zlib \
-	-I/tmp/prebuildify/node/15.0.0/deps/v8/include
+	-I/tmp/prebuildify/node/9.8.0/include/node \
+	-I/tmp/prebuildify/node/9.8.0/src \
+	-I/tmp/prebuildify/node/9.8.0/deps/openssl/config \
+	-I/tmp/prebuildify/node/9.8.0/deps/openssl/openssl/include \
+	-I/tmp/prebuildify/node/9.8.0/deps/uv/include \
+	-I/tmp/prebuildify/node/9.8.0/deps/zlib \
+	-I/tmp/prebuildify/node/9.8.0/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=bindings' \
 	'-DUSING_UV_SHARED=1' \
 	'-DUSING_V8_SHARED=1' \
 	'-DV8_DEPRECATION_WARNINGS=1' \
-	'-DV8_DEPRECATION_WARNINGS' \
-	'-DV8_IMMINENT_DEPRECATION_WARNINGS' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
-	'-D__STDC_FORMAT_MACROS' \
-	'-DOPENSSL_NO_PINSHARED' \
-	'-DOPENSSL_THREADS' \
 	'-DBUILDING_NODE_EXTENSION'
 
 # Flags passed to all source files.
@@ -82,18 +72,18 @@ CFLAGS_C_Release :=
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y \
+	-std=gnu++0x \
 	-fpermissive \
 	-fexceptions
 
 INCS_Release := \
-	-I/tmp/prebuildify/node/15.0.0/include/node \
-	-I/tmp/prebuildify/node/15.0.0/src \
-	-I/tmp/prebuildify/node/15.0.0/deps/openssl/config \
-	-I/tmp/prebuildify/node/15.0.0/deps/openssl/openssl/include \
-	-I/tmp/prebuildify/node/15.0.0/deps/uv/include \
-	-I/tmp/prebuildify/node/15.0.0/deps/zlib \
-	-I/tmp/prebuildify/node/15.0.0/deps/v8/include
+	-I/tmp/prebuildify/node/9.8.0/include/node \
+	-I/tmp/prebuildify/node/9.8.0/src \
+	-I/tmp/prebuildify/node/9.8.0/deps/openssl/config \
+	-I/tmp/prebuildify/node/9.8.0/deps/openssl/openssl/include \
+	-I/tmp/prebuildify/node/9.8.0/deps/uv/include \
+	-I/tmp/prebuildify/node/9.8.0/deps/zlib \
+	-I/tmp/prebuildify/node/9.8.0/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/bindings.o
