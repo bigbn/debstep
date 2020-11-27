@@ -33,7 +33,6 @@ CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
 	-std=gnu++0x \
-	-fpermissive \
 	-fexceptions
 
 INCS_Debug := \
@@ -73,7 +72,6 @@ CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
 	-std=gnu++0x \
-	-fpermissive \
 	-fexceptions
 
 INCS_Release := \
