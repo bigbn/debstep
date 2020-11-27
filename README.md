@@ -13,7 +13,7 @@ You can get package information for any package version what exist in `apt-cache
 
     import { aptCache } from 'debstep'
     const meta = aptCache.getTagsSync(make)
-    
+
     console.log(meta)
     // #_  {
     // #_      Package: 'make',
@@ -22,7 +22,6 @@ You can get package information for any package version what exist in `apt-cache
     // #_      Maintainer: 'Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
     // #_      Architecture: 'amd64'
     // #_  }
-
 
 ## Rebuild
 
@@ -89,7 +88,7 @@ Detailed package info
 
 ```javascript
 import { aptCache } from 'debstep'
-const meta = aptCache.getTags('vim', ['Installed-Size'], '2:8.1.0875-5')
+const meta = aptCache.getTagsSync('vim', ['Installed-Size'], '2:8.1.0875-5')
 console.log('vim installed size', meta['Installed-Size'])
 // #_ vim installed size 2800
 ```
