@@ -3,9 +3,35 @@
 Library to control `apt`(debian, ubuntu, mint default package manager) tasks via nodejs.
 This library use native binary `apt-pkg` library to access `apt` features.
 
-Package `libapt-pkg-dev` may required before installation.
+## Installation
 
-    sudo apt install libapt-pkg-dev
+    npm install --save debstep
+
+## Usage
+
+You can get package information for any package version what exist in `apt-cache`
+
+    import { aptCache } from 'debstep'
+    const meta = aptCache.getTagsSync(make)
+    
+    console.log(meta)
+    // #_  {
+    // #_      Package: 'make',
+    // #_      Version: '4.2.1-1.2',
+    // #_      'Installed-Size': '384',
+    // #_      Maintainer: 'Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
+    // #_      Architecture: 'amd64'
+    // #_  }
+
+
+## Rebuild
+
+This package is already shipped with some prebuild binaries but if you have some
+specific environment rebuild will start.
+Packages `libapt-pkg-dev` and `build-essential` required before installation if no 
+precompiled available.
+
+    sudo apt install build-essential libapt-pkg-dev
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 
