@@ -144,7 +144,7 @@ namespace debstep {
         if (current_version == version) {
           ver_iterator = version_list;
           break;
-        } else return result;
+        };
         version_list++;
       }
     } else ver_iterator = P.CurrentVer();
