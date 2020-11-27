@@ -24,7 +24,8 @@ namespace debstep {
   napi_value init(napi_env env, napi_value exports);
   napi_value GetPackageCandidateVersion(napi_env env, napi_callback_info info);
   napi_value GetPackageCurrentVersion(napi_env env, napi_callback_info info);
-
+  std::string getStringByChar(const char* symbol);
+  
   napi_value GetPackageTags(napi_env env, napi_callback_info info) {
     size_t argc = 3;
     napi_value dictonary, second, args[3];
@@ -63,10 +64,10 @@ namespace debstep {
       
       for(std::vector<std::pair<std::string, std::string>>::iterator it = dict.begin(); it != dict.end(); ++it) {
         int index = it - dict.begin();
-        status = napi_create_string_utf8(env, it->second.c_str(), NAPI_AUTO_LENGTH, &second);
+        status = napi_create_string_utf8(env, it->second.c_str(), it->second.length(), &second);
         if (status != napi_ok) return nullptr;
         
-        napi_property_descriptor descriptor = { it->first.c_str(), NULL, NULL, NULL, NULL, second, (napi_writable | napi_enumerable | napi_configurable), NULL };
+        napi_property_descriptor descriptor = { it->first.c_str(), NULL, NULL, NULL, NULL, second, static_cast<napi_property_attributes>(napi_writable | napi_enumerable | napi_configurable), NULL };
         descriptors[index] = descriptor;
       }
 
@@ -93,12 +94,15 @@ namespace debstep {
     pkgCacheFile cachefile;
     pkgCache *cache = cachefile.GetPkgCache();
     pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
-    pkgPolicy *policy = cachefile.GetPolicy();
-    pkgCache::VerIterator cand = policy->GetCandidateVer(packageIterator);
-    if (cand) {
-      status = napi_create_string_utf8(env, cand.VerStr(), sizeof(cand.VerStr()), &result);
-      if (status != napi_ok) return nullptr;
-      return result;
+    if (packageIterator) {
+      pkgPolicy *policy = cachefile.GetPolicy();
+      pkgCache::VerIterator cand = policy->GetCandidateVer(packageIterator);
+      if (cand) {
+        std::string versionStr = getStringByChar(cand.VerStr());
+        status = napi_create_string_utf8(env, cand.VerStr(), versionStr.length(), &result);
+        if (status != napi_ok) return nullptr;
+        return result;
+      }
     }
     return nullptr;
   }
@@ -118,11 +122,14 @@ namespace debstep {
     pkgCacheFile cachefile;
     pkgCache *cache = cachefile.GetPkgCache();
     pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
-    pkgCache::VerIterator current = packageIterator.CurrentVer();
-    if (current) {
-      status = napi_create_string_utf8(env, current.VerStr(), sizeof(current.VerStr()), &result);
-      if (status != napi_ok) return nullptr;
-      return result;
+    if (packageIterator) {
+      pkgCache::VerIterator current = packageIterator.CurrentVer();
+      if (current) {
+        std::string versionStr = getStringByChar(current.VerStr());
+        status = napi_create_string_utf8(env, versionStr.c_str(), versionStr.length(), &result);
+        if (status != napi_ok) return nullptr;
+        return result;
+      }
     }
     return nullptr;
   }
@@ -133,7 +140,7 @@ namespace debstep {
     if (version != "current") {
       pkgCache::VerIterator version_list = P.VersionList();
       while(!version_list.end()) {
-        std::string current_version(version_list.VerStr());
+        std::string current_version = getStringByChar(version_list.VerStr());
         if (current_version == version) {
           ver_iterator = version_list;
           break;
@@ -162,6 +169,10 @@ namespace debstep {
     return result;
   }
 
+  std::string getStringByChar(const char* ver) {
+      std::string tmp_string(ver);
+      return tmp_string;
+  }
   /*
   * N-API value to std::string
   */
@@ -171,7 +182,6 @@ namespace debstep {
     size_t str_size_read;
     status = napi_get_value_string_utf8(env, value, NULL, 0, &str_size);
     if (status != napi_ok) return nullptr;
-
     char * buf;
     buf = (char*)calloc(str_size + 1, sizeof(char));
     str_size = str_size + 1;

@@ -4,7 +4,7 @@
       "target_name": "bindings",
       "sources": [ "bindings.cpp" ],
       "library_dirs": [ "/usr/include/"],
-      "cflags_cc": ['-fpermissive', '-fexceptions'],
+      "cflags_cc": ['-fexceptions'],
       "libraries": [ "-lapt-pkg" ]      
     }
   ]
