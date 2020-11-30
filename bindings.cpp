@@ -155,7 +155,7 @@ namespace debstep {
     auto &Parser = LookupParser(Recs, ver_iterator, vf_iterator);
     char const *Start, *Stop;
     Parser.GetRec(Start, Stop);
-    size_t const Length = Stop - Start;
+    size_t const Length = Stop - Start + 1;
     pkgTagSection Tags;
     bool error = Tags.Scan(Start, Length, true);
     (void)error;
