@@ -1,7 +1,7 @@
 # debstep
 
 Library to control `apt`(debian, ubuntu, mint default package manager) tasks via nodejs.
-This library use native binary `apt-pkg` library to access `apt` features.
+This library uses native binary `apt-pkg` library to access `apt` features.
 
 ## Installation
 
@@ -15,20 +15,20 @@ You can get package information for any package version what exist in `apt-cache
     const meta = aptCache.getTagsSync(make)
 
     console.log(meta)
-    // #_  {
-    // #_      Package: 'make',
-    // #_      Version: '4.2.1-1.2',
-    // #_      'Installed-Size': '384',
-    // #_      Maintainer: 'Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
-    // #_      Architecture: 'amd64'
-    // #_  }
+    {
+        Package: 'make',
+        Version: '4.2.1-1.2',
+        'Installed-Size': '384',
+        Maintainer: 'Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>',
+        Architecture: 'amd64'
+    }
 
 ## Rebuild
 
 This package is already shipped with some prebuild binaries but if you have some
 specific environment rebuild will start.
 Packages `libapt-pkg-dev` and `build-essential` required before installation if no 
-precompiled available.
+precompiled binaries are available.
 
     sudo apt install build-essential libapt-pkg-dev
 
