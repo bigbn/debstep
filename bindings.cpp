@@ -160,7 +160,7 @@ namespace debstep {
     pkgTagSection Tags;
     bool error = Tags.Scan(Start, Length, true);
     
-    if (!error) return result;
+    if (error != 0) return result;
     
     for(std::vector<std::string>::iterator it = tags.begin(); it != tags.end(); ++it) {
       std::pair<std::string, std::string> record(*it, Tags.FindS((*it).c_str()));
