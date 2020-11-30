@@ -95,8 +95,7 @@ namespace debstep {
     pkgCache *cache = cachefile.GetPkgCache();
     pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
     if (packageIterator) {
-      pkgPolicy *policy = cachefile.GetPolicy();
-      pkgCache::VerIterator cand = policy->GetCandidateVer(packageIterator);
+      pkgCache::VerIterator cand = packageIterator.VersionList();
       if (cand) {
         std::string versionStr = getStringByChar(cand.VerStr());
         status = napi_create_string_utf8(env, cand.VerStr(), versionStr.length(), &result);
@@ -159,8 +158,7 @@ namespace debstep {
     size_t const Length = Stop - Start;
     pkgTagSection Tags;
     bool error = Tags.Scan(Start, Length, true);
-    
-    if (error != 0) return result;
+    (void)error;
     
     for(std::vector<std::string>::iterator it = tags.begin(); it != tags.end(); ++it) {
       std::pair<std::string, std::string> record(*it, Tags.FindS((*it).c_str()));
