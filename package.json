@@ -1,6 +1,6 @@
 {
   "name": "debstep",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Control apt tasks via nodejs",
   "main": "index.js",
   "scripts": {
