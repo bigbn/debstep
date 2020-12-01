@@ -10,14 +10,17 @@
 #include <apt-pkg/pkgsystem.h>
 #include <apt-pkg/policy.h>
 
+#include <regex>
 #include <vector>
 #include <utility>
 using namespace std;
 
 namespace debstep {
 
+  std::regex base_re("^[Xx]{1}[BbCcSs]{1,2}-.+$");
+  std::cmatch match;
   napi_value GetPackageTags(napi_env env, napi_callback_info info);
-  std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version);
+  std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version, size_t count);
   std::string getString(napi_env env, napi_value value);
   std::vector<std::string> getArray(napi_env env, napi_value value);
   pkgRecords::Parser &LookupParser(pkgRecords &Recs, pkgCache::VerIterator const &V, pkgCache::VerFileIterator &Vf);
@@ -25,7 +28,8 @@ namespace debstep {
   napi_value GetPackageCandidateVersion(napi_env env, napi_callback_info info);
   napi_value GetPackageCurrentVersion(napi_env env, napi_callback_info info);
   std::string getStringByChar(const char* symbol);
-  
+  size_t getUserTagsCount(std::vector<std::string> array);
+
   napi_value GetPackageTags(napi_env env, napi_callback_info info) {
     size_t argc = 3;
     napi_value dictonary, second, args[3];
@@ -57,7 +61,8 @@ namespace debstep {
     pkgCache::PkgIterator packageIterator = cache->FindPkg(package_name.c_str());
     
     if (packageIterator) {
-      std::vector<std::pair<std::string, std::string>> dict = packageInfo(packageIterator, cachefile, tags, version);
+      const size_t count = getUserTagsCount(tags);
+      std::vector<std::pair<std::string, std::string>> dict = packageInfo(packageIterator, cachefile, tags, version, count);
       if (dict.size() == 0) return nullptr;
       
       napi_property_descriptor descriptors[dict.size()];
@@ -133,7 +138,7 @@ namespace debstep {
     return nullptr;
   }
 
-  std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version) {
+  std::vector<std::pair<std::string, std::string>> packageInfo(const pkgCache::PkgIterator &P, const pkgCacheFile &cacheFile, std::vector<std::string> tags, std::string version, size_t count) {
     std::vector<std::pair<std::string, std::string>> result = {};
     pkgCache::VerIterator ver_iterator;
     if (version != "current") {
@@ -155,7 +160,7 @@ namespace debstep {
     auto &Parser = LookupParser(Recs, ver_iterator, vf_iterator);
     char const *Start, *Stop;
     Parser.GetRec(Start, Stop);
-    size_t const Length = Stop - Start + 1;
+    size_t const Length = Stop - Start + count;
     pkgTagSection Tags;
     bool error = Tags.Scan(Start, Length, true);
     (void)error;
@@ -165,6 +170,16 @@ namespace debstep {
       result.push_back(record);
     }
     return result;
+  }
+
+  size_t getUserTagsCount(std::vector<std::string> array) {
+    size_t count = 0;
+    for(std::vector<std::string>::iterator it = array.begin(); it != array.end(); ++it) {
+      if (std::regex_match((*it).c_str(), match, base_re)) {
+        count++;
+      }
+    }
+    return count;
   }
 
   std::string getStringByChar(const char* ver) {
