@@ -35,7 +35,7 @@
     "url": "https://github.com/bigbn/debstep/issues"
   },
   "homepage": "https://github.com/bigbn/debstep#readme",
-  "dependencies": {    
+  "dependencies": {
     "node-gyp-build": "^4.2.3",
     "prebuildify": "^4.1.1"
   },
