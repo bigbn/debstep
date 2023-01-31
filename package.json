@@ -8,7 +8,7 @@
     "install": "node-gyp-build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:clean && npm run build:native && npm run build:lib && npm run build:flow && npm run build:doc && npm run build:copy",
-    "build:native": "prebuildify --verbose --napi --thin=yes --ensure --release -t 14.15.0 -t 12.18.3 -t 9.8.0",
+    "build:native": "prebuildify --verbose --napi --thin=yes --ensure --release -t 18.13.0 -t 16.0.0 -t 14.15.0 -t 12.18.3 -t 9.8.0",
     "build:clean": "rimraf lib",
     "build:lib": "babel src/ -d lib/",
     "build:flow": "flow-copy-source -v src lib",
