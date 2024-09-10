@@ -3,19 +3,22 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick a Node version: 10, 12, 14
-		"args": { "VARIANT": "14" }
+		"args": { "VARIANT": "20" }
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash"
+	"customizations": {	
+		"vscode": {
+			"extensions": [		
+				"dbaeumer.vscode-eslint",
+				"flowtype.flow-for-vscode",
+				"standard.vscode-standard"
+			]
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"dbaeumer.vscode-eslint"
-	],
-
+	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
