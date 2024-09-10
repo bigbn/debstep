@@ -43,24 +43,14 @@ precompiled binaries are available.
 -   [aptCache](#aptcache)
     -   [defaultTags](#defaulttags)
     -   [getTagsSync](#gettagssync)
-        -   [Parameters](#parameters)
-        -   [Examples](#examples)
     -   [getCurrentVersionSync](#getcurrentversionsync)
-        -   [Parameters](#parameters-1)
-        -   [Examples](#examples-1)
     -   [getCandidateVersionSync](#getcandidateversionsync)
-        -   [Parameters](#parameters-2)
-        -   [Examples](#examples-2)
     -   [hasUpgradesSync](#hasupgradessync)
-        -   [Parameters](#parameters-3)
-        -   [Examples](#examples-3)
 -   [apt](#apt)
     -   [update](#update)
     -   [upgrade](#upgrade)
     -   [install](#install)
-        -   [Parameters](#parameters-4)
     -   [uninstall](#uninstall)
-        -   [Parameters](#parameters-5)
 -   [debstep](#debstep)
 
 ## aptCache
@@ -78,13 +68,13 @@ Type: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global
 Extract package meta-information from apt-cache index.
 Detailed package info
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `tags` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>**  (optional, default `defaultTags`)
--   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** 
+-   `version` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-#### Examples
+**Examples**
 
 ```javascript
 import { aptCache } from 'debstep'
@@ -99,11 +89,11 @@ Returns **{}?**
 
 Get current package version
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-#### Examples
+**Examples**
 
 ```javascript
 import { aptCache } from 'debstep'
@@ -118,11 +108,11 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Get latest package version to be upgraded
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-#### Examples
+**Examples**
 
 ```javascript
 import { aptCache } from 'debstep'
@@ -137,11 +127,11 @@ Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/G
 
 Check if package has upgrades
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-#### Examples
+**Examples**
 
 ```javascript
 import { aptCache } from 'debstep'
@@ -172,7 +162,7 @@ apt-upgrade native execution
 
 apt-install native execution
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
@@ -183,7 +173,7 @@ apt-install native execution
 
 apt-uninstall native execution
 
-#### Parameters
+**Parameters**
 
 -   `packageName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
